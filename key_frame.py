@@ -3,11 +3,13 @@ import numpy as np
 import os
 import lbp
 from matplotlib import pyplot as plt
+import pandas as pd
 
-video_path = "C:/Users/ziyad/Desktop/all desktop/Heriotwat/RP/Code/video1.mp4"
-dir_name="C:/Users/ziyad/Desktop/all desktop/Heriotwat/RP/Code/testvid"
+video_path = "C:/Users/ziyad/Desktop/all desktop/Heriotwat/RP/Code/Research/video1.mp4"
+dir_name="C:/Users/ziyad/Desktop/all desktop/Heriotwat/RP/Code/Research/testvid"
 p_frame_thresh = 200000 # You may need to adjust this threshold
-
+dfn=list()
+df=list()
 cap = cv2.VideoCapture(video_path)
 # Read the first frame.
 ret, prev_frame = cap.read()
@@ -28,12 +30,12 @@ while ret:
             for i in range(0, height):
                 for j in range(0, width):
                     img_lbp[i, j] = lbp.lbp_calculated_pixel(img_gray, i, j)
-            plt.imshow(prev_frame)
-            plt.show()
-            plt.imshow(img_lbp,cmap ="gray")
-            plt.show()
-            break
+            dfn=[prev_frame,img_lbp]
+            df.append(dfn)
+            
         prev_frame = curr_frame
         
         count+=1
         cv2.waitKey(1)
+
+
